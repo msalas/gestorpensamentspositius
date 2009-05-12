@@ -13,7 +13,7 @@
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>springapp</servlet-name>
+    <servlet-name>gpp</servlet-name>
     <url-pattern>*.htm</url-pattern>
   </servlet-mapping>
 
