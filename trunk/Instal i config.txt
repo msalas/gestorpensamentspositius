@@ -1,0 +1,19 @@
+###############################################################################
+######                                                                   ######
+######            Instal.lació i configuració de l'aplicació             ######
+######                                                                   ######
+######                  GESTOR DE PENSAMENTS POSITIUS                    ######
+######                                                                   ######
+###############################################################################
+
+##### 0. Introducció
+
+Aquest document descriu tots els passos que s'han de seguir per a instal.lar i 
+configurar correctament l'aplicacio per gestionar pensaments positius, així com
+el seu desplegament i execució. 
+
+
+http://s3.amazonaws.com/dist.springframework.org/release/SPR/spring-framework-2.5.6.SEC01-with-dependencies.zip
+
+First create a 'lib'  directory in the 'war/WEB-INF'  directory. Then, from the Spring distribution, copy spring.jar (from spring-framework-2.5/dist) and spring-webmvc.jar (from spring-framework-2.5/dist/modules) to the new 'war/WEB-INF/lib' directory. Also, copy commons-logging.jar (from spring-framework-2.5/lib/jakarta-commons) to the 'war/WEB-INF/lib' directory. These jars will be deployed to the server and they are also used during the build process.
+
