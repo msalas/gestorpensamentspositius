@@ -24,9 +24,8 @@ import java.util.List;
 @Repository("pensamentDao")
 public class PensamentDaoImpl extends SimpleJdbcDaoSupport implements PensamentDao {
 
-    private static final String GENERAL_QUERY = "SELECT p.*, "
-            + "       get_stars_for_ambassadorreport( " + "         report.id "
-            + "  FROM pensament p";
+    private static final String GENERAL_QUERY = "SELECT p.* FROM pensament p";
+            
     
     private static final String STATUS_CONDITION = " report.status = ?";
 
