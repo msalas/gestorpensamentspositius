@@ -35,7 +35,7 @@
   <!--  config.props -->
   <context:property-placeholder
     location="/WEB-INF/properties/config.properties" />
-<!-- 
+ 
   <bean id="dataSourceTarget"
     class="org.apache.commons.dbcp.BasicDataSource"
     destroy-method="close" p:driverClassName="${DATABASE_JDBC}"
@@ -45,19 +45,19 @@
     p:accessToUnderlyingConnectionAllowed="true" p:initialSize="1"
     p:maxActive="${MAXCONNECTIONS}" />
 
- -->
+
   <!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
- <!--
+ 
   <bean id="txManager"
     class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
     p:dataSource-ref="dataSourceTarget" />
--->
+
   <!-- Activates @Transactional -->
-  <!-- <tx:annotation-driven transaction-manager="txManager" />
- -->
+   <tx:annotation-driven transaction-manager="txManager" />
+
 
   <!--  delete and add @Transactional in the service layer classes ****************************************** -->
- <!--
+
   <bean id="baseTransactionProxy"
     class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
     abstract="true">
@@ -78,7 +78,7 @@
       </props>
     </property>
   </bean>
- -->
+ 
   <!-- message sources -->
   <bean id="messageSource"
     class="org.springframework.context.support.ResourceBundleMessageSource"
