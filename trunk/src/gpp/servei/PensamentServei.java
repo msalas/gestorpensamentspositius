@@ -9,8 +9,7 @@ public interface PensamentServei {
     void addPensament(Pensament pensament);
     Pensament getPensament(int id);
     List<Pensament> getPensaments();
-    void setPensaments(List<Pensament> pensaments);
-
+    
 
 //    void getPublished(ReportsQuery query);
 //

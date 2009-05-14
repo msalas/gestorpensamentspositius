@@ -17,3 +17,4 @@ http://s3.amazonaws.com/dist.springframework.org/release/SPR/spring-framework-2.
 
 First create a 'lib'  directory in the 'war/WEB-INF'  directory. Then, from the Spring distribution, copy spring.jar (from spring-framework-2.5/dist) and spring-webmvc.jar (from spring-framework-2.5/dist/modules) to the new 'war/WEB-INF/lib' directory. Also, copy commons-logging.jar (from spring-framework-2.5/lib/jakarta-commons) to the 'war/WEB-INF/lib' directory. These jars will be deployed to the server and they are also used during the build process.
 
+http://jdbc.postgresql.org/download/postgresql-8.3-604.jdbc3.jar

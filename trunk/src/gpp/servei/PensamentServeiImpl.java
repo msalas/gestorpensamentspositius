@@ -4,18 +4,27 @@ package gpp.servei;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.*;
 
 
 import gpp.bean.Pensament;
+import gpp.dao.PensamentDao;
+import gpp.exception.BusinessException;
 
 
 
 @Service("pensamentServei")
-//@Transactional(readOnly = true, propagation = Propagation.REQUIRED, rollbackFor = BusinessException.class)
+@Transactional(readOnly = true, propagation = Propagation.REQUIRED, rollbackFor = BusinessException.class)
 public class PensamentServeiImpl implements PensamentServei {
 
-	private List<Pensament> pensaments;
+
+	
+	@Resource
+	private PensamentDao pDAO;
+	
 	
 	public void addPensament(Pensament pensament) {
 		// TODO Auto-generated method stub
@@ -25,12 +34,10 @@ public class PensamentServeiImpl implements PensamentServei {
 
     
     public List<Pensament> getPensaments() {
-        return pensaments;
+        return pDAO.getPensaments();
     }
 
-    public void setPensaments(List<Pensament> pensaments) {
-        this.pensaments = pensaments;
-    }
+
 
 	public Pensament getPensament(int id) {
 		// TODO Auto-generated method stub
