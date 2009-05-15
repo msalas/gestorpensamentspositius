@@ -35,6 +35,13 @@
 		</listener-class>
 	</listener>
 
+	<filter>
+		<filter-name>AuthentificatorFilter</filter-name>
+		<filter-class>
+			gpp.filters.UserSecurityFilter
+		</filter-class>
+	</filter>
+	
 	<!-- 
 	<servlet-mapping>
 		<servlet-name>AdminController</servlet-name>
