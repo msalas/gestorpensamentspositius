@@ -8,8 +8,8 @@ public interface PensamentServei {
 
     void addPensament(Pensament pensament);
     Pensament getPensament(int id);
-    List<Pensament> getPensaments();
-    
+    List<Pensament> getPensamentsPopularitat();
+    List<Pensament> getPensamentsAModerar();
 
 //    void getPublished(ReportsQuery query);
 //

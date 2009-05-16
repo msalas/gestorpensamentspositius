@@ -33,11 +33,13 @@ public class PensamentServeiImpl implements PensamentServei {
 
 
     
-    public List<Pensament> getPensaments() {
-        return pDAO.getPensaments();
+    public List<Pensament> getPensamentsPopularitat() {
+        return pDAO.getPensamentsPopularitat();
     }
 
-
+    public List<Pensament> getPensamentsAModerar() {
+        return pDAO.getPensamentsAModerar();
+    }
 
 	public Pensament getPensament(int id) {
 		// TODO Auto-generated method stub

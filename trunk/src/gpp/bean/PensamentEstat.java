@@ -1,8 +1,7 @@
 package gpp.bean;
 
 public enum PensamentEstat {
-	AWAITING_MODERATION(0), PUBLISHED(1), REJECTED(2), REJECTED_EDITABLE(3), UNDER_WORK(
-            4);
+	POSITIU(1), DUBTOS(2), NEGATIU(3);
 
     private int id;
 

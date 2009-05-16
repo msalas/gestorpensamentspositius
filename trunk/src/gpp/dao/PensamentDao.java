@@ -6,6 +6,7 @@ import gpp.bean.Pensament;
 
 public interface PensamentDao {
 
-	List<Pensament> getPensaments();
+	List<Pensament> getPensamentsPopularitat();
+	List<Pensament> getPensamentsAModerar();
     
 }

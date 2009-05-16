@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-import com.series60.bean.SessionBean;
-import com.series60.command.SessionManager;
-import com.series60.util.Constant;
+
 
 public class UserSecurityFilter implements Filter {
 
@@ -24,7 +22,7 @@ public class UserSecurityFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
 
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
+    	/* HttpServletRequest httpRequest = (HttpServletRequest) request;
 
         SessionBean sessionBean = SessionManager.getSessionBean(httpRequest, Constant.UG_END_USER);
         if ( sessionBean == null || !sessionBean.isEndUserLogged() ) {
@@ -34,7 +32,7 @@ public class UserSecurityFilter implements Filter {
                 return;
 
         }
-        chain.doFilter(request,response);
+       */ chain.doFilter(request,response);
 
     }
 

@@ -1,3 +1,11 @@
+-- Database: gpp
+
+-- DROP DATABASE gpp;
+-- LA DB s'ha de crear primer, i dp un cop connectats a aquesta crear les taules.
+CREATE DATABASE gpp
+  WITH OWNER = postgres
+       ENCODING = 'UTF8';
+       
 -- Table: usuari_grup
 
 -- DROP TABLE usuari_grup;
@@ -35,21 +43,7 @@ CREATE TABLE usuari
 WITH (OIDS=FALSE);
 ALTER TABLE usuari OWNER TO postgres;
 
--- Table: pensament_estat
-
--- DROP TABLE pensament_estat;
-
-CREATE TABLE pensament_estat
-(
-  id serial NOT NULL,
-  nom character varying(20) NOT NULL,
-  descripcio character varying(100),
-  CONSTRAINT pensament_estat_pkey PRIMARY KEY (id)
-)
-WITH (OIDS=FALSE);
-ALTER TABLE pensament_estat OWNER TO postgres;
-
-ROP TABLE pensament_comentari;
+-- DROP TABLE pensament_comentari;
 
 CREATE TABLE pensament_comentari
 (
@@ -78,7 +72,7 @@ CREATE TABLE pensament
   estat integer NOT NULL,
   data_creacio timestamp with time zone DEFAULT now(),
   data_publicacio timestamp with time zone,
-  ultima_modificacio timestamp with time zone,
+  data_modificacio timestamp with time zone,
   vots integer NOT NULL DEFAULT 0,
   CONSTRAINT pensament_pkey PRIMARY KEY (id),
   CONSTRAINT pensament_autor_fkey FOREIGN KEY (autor)
@@ -86,9 +80,6 @@ CREATE TABLE pensament
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT pensament_comentari_fkey FOREIGN KEY (comentari)
       REFERENCES pensament_comentari (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT pensament_estat_fkey FOREIGN KEY (estat)
-      REFERENCES pensament_estat (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (OIDS=FALSE);
@@ -137,6 +128,9 @@ INSERT INTO usuari(nom_usuari, contrassenya, nom, cognoms, email, edat, tipus)
 INSERT INTO usuari(nom_usuari, contrassenya, nom, cognoms, email, edat, tipus)
     VALUES ('soclacanya','test1234','Manel','Canut','manel.canut@eureka.com',NULL, 1);
 
+INSERT INTO usuari(nom_usuari, contrassenya, nom, cognoms, email, edat, tipus)
+    VALUES ('socundesastre','test1234','Pepe','Velez','pepe.velez@eureka.com',NULL, 1);
+
 -- CREACIO D'ESTATS DELS PENSAMENTS
 INSERT INTO pensament_estat(nom) VALUES ('POSITIU');
 INSERT INTO pensament_estat(nom) VALUES ('DUBTOS');
@@ -144,8 +138,14 @@ INSERT INTO pensament_estat(nom) VALUES ('NEGATIU');
 
 -- CREACIO DE PENSAMENTS
 INSERT INTO pensament(titol, descripcio, autor, estat)
-    VALUES ('Fa bon dia','Avui fa un dia esplèndid. Fa molt de sol. És un dia alegre!',12,1);
+    VALUES ('Fa bon dia','Avui fa un dia esplèndid. Fa molt de sol. És un dia alegre!',4,1);
+INSERT INTO pensament(titol, descripcio, autor, estat) VALUES ('Fa mal dia','Avui fa un dia horroros!',4,3);
 
+INSERT INTO pensament(titol, descripcio, autor, estat)
+    VALUES ('Salut és vida!','M''encanta fer esport, i cuidar-me. ',5,1);
+INSERT INTO pensament(titol, descripcio, autor, estat) VALUES ('Font Vella','Aigua natural Font Vella, la millor.',5,2);
+
+    
 -- CREACIO DE COMENTARIS
 
 -- CREACIO DE VOTS
