@@ -20,14 +20,24 @@ public class LlistaPensamentsController {
     
 	@Resource
     private PensamentServei pServei;
-    private String viewName = "hello";
+    private String viewName = "llistaPensaments";
+    private String viewNameMod = "/mod/llistaPensaments";
  
     @RequestMapping(method = RequestMethod.GET, value="/llistaPensaments.do")
     public ModelAndView handle(HttpServletRequest request, Model model) {
         
-    	List <Pensament> pensaments = pServei.getPensaments();
+    	List <Pensament> pensaments = pServei.getPensamentsPopularitat();
     	
         return new ModelAndView(viewName, "pensaments", pensaments);
+    }
+    
+    
+    @RequestMapping(method = RequestMethod.GET, value="/mod/llistaPensaments.do")
+    public ModelAndView handle2(HttpServletRequest request, Model model) {
+        
+    	List <Pensament> pensaments = pServei.getPensamentsAModerar();
+    	
+        return new ModelAndView(viewNameMod, "pensaments", pensaments);
     }
     
     /*
