@@ -8,5 +8,7 @@ public interface PensamentDao {
 
 	List<Pensament> getPensamentsPopularitat();
 	List<Pensament> getPensamentsAModerar();
+	List<Pensament> getPensamentsPopularitatPerUsuariId(int usuariId);
+	List<Pensament> getPensamentsAModerarPerUsuariId(int usuariId);
     
 }

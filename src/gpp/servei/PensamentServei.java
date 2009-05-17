@@ -10,6 +10,8 @@ public interface PensamentServei {
     Pensament getPensament(int id);
     List<Pensament> getPensamentsPopularitat();
     List<Pensament> getPensamentsAModerar();
+	List<Pensament> getPensamentsAModerarPerUsuariId(int usuariId);
+	List<Pensament> getPensamentsPopularitatPerUsuariId(int usuariId);
 
 //    void getPublished(ReportsQuery query);
 //

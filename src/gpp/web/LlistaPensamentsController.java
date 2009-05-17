@@ -5,13 +5,18 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import gpp.bean.Pensament;
+import gpp.bean.Usuari;
 import gpp.servei.PensamentServei;
+import gpp.servei.UsuariServei;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+
+
+
 
 import javax.annotation.Resource;
 
@@ -20,25 +25,41 @@ public class LlistaPensamentsController {
     
 	@Resource
     private PensamentServei pServei;
-    private String viewName = "llistaPensaments";
-    private String viewNameMod = "/mod/llistaPensaments";
- 
+   
+	@Resource
+	private UsuariServei uServei;
+	
+	private String viewName = "llistaPensaments";
+  
     @RequestMapping(method = RequestMethod.GET, value="/llistaPensaments.do")
-    public ModelAndView handle(HttpServletRequest request, Model model) {
+    public String handle(HttpServletRequest request, Model model) {
         
-    	List <Pensament> pensaments = pServei.getPensamentsPopularitat();
     	
-        return new ModelAndView(viewName, "pensaments", pensaments);
+    	List <Pensament> pensaments;
+    	int perfil = 0;
+    	int usuariId = ServletRequestUtils.getIntParameter(request, "id", -1);
+  
+    	Usuari autor = null;
+    	
+    	if(usuariId!=-1) autor = uServei.getUsuariRegistrat(usuariId);
+    	
+    	//Si és Moderador mostrem pensaments  a moderar
+    	if(perfil==2){
+    		if(usuariId!=-1) pensaments = pServei.getPensamentsAModerarPerUsuariId(usuariId);
+        	else pensaments = pServei.getPensamentsAModerar();
+    		   
+    	}else{
+    		if(usuariId!=-1) pensaments = pServei.getPensamentsPopularitatPerUsuariId(usuariId);
+    		else pensaments = pServei.getPensamentsPopularitat(); 
+    	}
+          	
+    	model.addAttribute("usuari", autor);
+    	model.addAttribute("perfil", perfil);
+    	model.addAttribute("pensaments", pensaments);
+
+    	return viewName;
     }
     
-    
-    @RequestMapping(method = RequestMethod.GET, value="/mod/llistaPensaments.do")
-    public ModelAndView handle2(HttpServletRequest request, Model model) {
-        
-    	List <Pensament> pensaments = pServei.getPensamentsAModerar();
-    	
-        return new ModelAndView(viewNameMod, "pensaments", pensaments);
-    }
     
     /*
     @RequestMapping(method = RequestMethod.POST, value="/report/removeMyReport.do")
