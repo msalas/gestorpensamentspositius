@@ -37,7 +37,7 @@ public class PensamentDaoImpl extends SimpleJdbcDaoSupport implements PensamentD
     public List<Pensament> getPensamentsPopularitat() {
         logger.info("Obtenim llista pensaments positius!");
         List<Pensament> pensaments = getSimpleJdbcTemplate().query(
-                "select p.*,nom_usuari from pensament p, usuari u where p.estat=1 and p.autor=u.id order by vots desc, data_creacio asc", 
+                "select p.*,nom_usuari,u.id as user_id from pensament p, usuari u where p.estat=1 and p.autor=u.id order by vots desc, data_creacio asc", 
                 new PensamentMapper());
         return pensaments;
     }
@@ -45,7 +45,23 @@ public class PensamentDaoImpl extends SimpleJdbcDaoSupport implements PensamentD
     public List<Pensament> getPensamentsAModerar() {
         logger.info("Obtenim llista pensaments a moderar!");
         List<Pensament> pensaments = getSimpleJdbcTemplate().query(
-                "select p.*,nom_usuari from pensament p,usuari u where p.estat<>1 and p.autor=u.id order by data_modificacio desc", 
+                "select p.*,nom_usuari,u.id as user_id from pensament p,usuari u where p.autor=u.id order by data_modificacio desc", 
+                new PensamentMapper());
+        return pensaments;
+    }
+
+    public List<Pensament> getPensamentsPopularitatPerUsuariId(int usuariId) {
+        logger.info("Obtenim llista pensaments positius!");
+        List<Pensament> pensaments = getSimpleJdbcTemplate().query(
+                "select p.*,nom_usuari,u.id as user_id from pensament p, usuari u where p.estat=1 and p.autor="+usuariId+" and p.autor=u.id order by vots desc, data_creacio asc", 
+                new PensamentMapper());
+        return pensaments;
+    }
+
+    public List<Pensament> getPensamentsAModerarPerUsuariId(int usuariId) {
+        logger.info("Obtenim llista pensaments a moderar!");
+        List<Pensament> pensaments = getSimpleJdbcTemplate().query(
+                "select p.*,nom_usuari,u.id as user_id from pensament p,usuari u where p.autor="+usuariId+" and p.autor=u.id order by data_modificacio desc", 
                 new PensamentMapper());
         return pensaments;
     }
@@ -74,12 +90,13 @@ public class PensamentDaoImpl extends SimpleJdbcDaoSupport implements PensamentD
             p.setVots(rs.getInt("vots"));
             
             Usuari creadorPensament = new Usuari();
-            creadorPensament.setNomUsuari("nom_usuari");
+            creadorPensament.setNomUsuari(rs.getString("nom_usuari"));
+            creadorPensament.setId(rs.getInt("user_id"));
             p.setAutor(creadorPensament);
             
             return p;
         }
-
+        
     }
 
     @Autowired
