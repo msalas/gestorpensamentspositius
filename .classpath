@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-dbcp.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-pool.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/postgresql-8.3-604.jdbc3.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jstl.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

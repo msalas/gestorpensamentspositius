@@ -5,6 +5,7 @@
     <h1>Gestor Pensaments Positius</h1>
     
     <div id="header">
-   <p>Benvingut/da NOMUSUARI
+   <p>Benvingut/da <c:out value="${usuariActiu.nomUsuari}"></c:out></p>
+   <a href="logout.do">Logout</a>
     </div>
         <div id="cos">

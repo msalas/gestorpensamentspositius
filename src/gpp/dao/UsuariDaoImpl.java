@@ -1,6 +1,7 @@
 package gpp.dao;
 
 import gpp.bean.Usuari;
+import gpp.bean.UsuariGrup;
 
 import java.sql.SQLException;
 
@@ -59,6 +60,12 @@ public class UsuariDaoImpl extends SimpleJdbcDaoSupport implements UsuariDao {
         	
         	u.setId(rs.getInt("id"));
         	u.setNomUsuari(rs.getString("nom_usuari"));
+        	u.setNom(rs.getString("nom"));
+        	u.setCognoms(rs.getString("cognoms"));
+        	u.setContrassenya(rs.getString("contrassenya"));
+        	u.setEdat(rs.getInt("edat"));
+        	u.setGrup(UsuariGrup.valueOf(rs.getInt("tipus")));
+        	u.setEmail(rs.getString("email"));
       
         	return u;
         }
@@ -70,6 +77,16 @@ public class UsuariDaoImpl extends SimpleJdbcDaoSupport implements UsuariDao {
     DataSource ds) {
         setDataSource(ds);
     }
+
+	public Usuari login(String username, String password) {
+		 Usuari usuari = null;
+	        try{
+	        	usuari =  getSimpleJdbcTemplate().queryForObject("select u.* from usuari u where u.nom_usuari='"+username+"' and contrassenya='"+password+"'" ,new UsuariMapper());
+	        }catch (Exception e) {
+				e.printStackTrace();
+			}
+	        return usuari;
+	}
 
 
 

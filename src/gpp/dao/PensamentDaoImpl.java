@@ -66,6 +66,7 @@ public class PensamentDaoImpl extends SimpleJdbcDaoSupport implements PensamentD
         return pensaments;
     }
 
+    /*
     public void savePensament(Pensament p) {
         logger.info("Saving product: " + p.getDescripcio());
         int count = getSimpleJdbcTemplate().update(
@@ -74,6 +75,7 @@ public class PensamentDaoImpl extends SimpleJdbcDaoSupport implements PensamentD
                 .addValue("id", p.getId()));
         logger.info("Rows affected: " + count);
     }
+    */
     
     private static class PensamentMapper implements ParameterizedRowMapper<Pensament> {
 
@@ -105,9 +107,35 @@ public class PensamentDaoImpl extends SimpleJdbcDaoSupport implements PensamentD
         setDataSource(ds);
     }
 
-//    @Override
-//    protected void initDao() throws Exception {
-//
-//    }
+
+	public void marcarPensament(int pensamentId) {
+		getSimpleJdbcTemplate().update("update pensament set estat=3 where id="+pensamentId);
+		
+	}
+
+
+	public void votarPensament(Usuari usuari, Pensament p) {
+		Integer usuariId = usuari!=null?usuari.getId():null;
+		getSimpleJdbcTemplate().update("insert into pensament_vot(votant,pensament) values("+usuariId+","+p.getId()+")");
+		
+	}
+
+
+	public Pensament getPensament(int id) {
+	
+	        logger.info("Obtenim pensament"+id);
+	        Pensament pensament = null;
+	        
+	        try{
+	        pensament =  getSimpleJdbcTemplate().queryForObject(
+	                "select p.*,nom_usuari,u.id as user_id from pensament p,usuari u where p.autor=u.id and p.id="+id, 
+	                new PensamentMapper());
+	        
+	        }catch (Exception e) {
+				
+			}
+	        return pensament;
+	}
+
 
 }

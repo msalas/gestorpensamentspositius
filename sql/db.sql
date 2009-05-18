@@ -150,4 +150,28 @@ INSERT INTO pensament(titol, descripcio, autor, estat) VALUES ('Font Vella','Aig
 
 -- CREACIO DE VOTS
 
-select * from pensament_estat
+
+CREATE TRUSTED PROCEDURAL LANGUAGE 'plpgsql'
+  HANDLER plpgsql_call_handler
+  VALIDATOR plpgsql_validator;
+
+CREATE OR REPLACE FUNCTION actualitza_vots()
+  RETURNS "trigger" AS 
+$BODY$
+BEGIN
+        
+        UPDATE pensament SET vots=vots+NEW.puntuacio WHERE id = NEW.pensament;
+
+        RETURN NEW;
+END;
+$BODY$
+  LANGUAGE 'plpgsql' VOLATILE;
+  
+  
+-- DROP TRIGGER votacio ON pensament_vot;
+
+CREATE TRIGGER votacio
+  AFTER INSERT
+  ON pensament_vot
+  FOR EACH ROW
+  EXECUTE PROCEDURE actualitza_vots();
