@@ -25,5 +25,10 @@ public class UsuariServeiImpl implements UsuariServei{
 		return uDAO.getUsuariRegistrat(id);
 	}
 
+	public Usuari login(String username, String password) {
+		return uDAO.login(username,password);
+		
+	}
+
 	
 }

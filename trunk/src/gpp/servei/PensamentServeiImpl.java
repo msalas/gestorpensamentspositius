@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.*;
 
 
 import gpp.bean.Pensament;
+import gpp.bean.Usuari;
 import gpp.dao.PensamentDao;
 import gpp.exception.BusinessException;
 
@@ -42,8 +43,7 @@ public class PensamentServeiImpl implements PensamentServei {
     }
 
 	public Pensament getPensament(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return pDAO.getPensament(id);
 	}
 
 
@@ -53,6 +53,19 @@ public class PensamentServeiImpl implements PensamentServei {
 
 	public List<Pensament> getPensamentsPopularitatPerUsuariId(int usuariId) {
 		return pDAO.getPensamentsPopularitatPerUsuariId(usuariId);
+	}
+
+
+	public void marcarPensament(int pensamentId) {
+		pDAO.marcarPensament(pensamentId);
+		
+	}
+
+
+
+
+	public void votarPensament(Usuari usuari, Pensament p) {
+		pDAO.votarPensament(usuari,p);
 	}
 
 }

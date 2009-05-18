@@ -1,10 +1,10 @@
 <c:choose>
-<c:when test="${perfil==1}">
+<c:when test="${usuariActiu.grup=='REGISTRAT'}">
 <%@ include file="headerSigned.jsp" %>
 <%@ include file="menuUR.jsp" %>
 
 </c:when>
-<c:when test="${perfil==2}">
+<c:when test="${usuariActiu.grup=='MODERADOR'}">
 <%@ include file="headerSigned.jsp" %>
 <%@ include file="menuM.jsp" %>
 

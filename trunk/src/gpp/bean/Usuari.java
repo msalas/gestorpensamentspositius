@@ -9,7 +9,14 @@ public class Usuari {
 	Integer edat;
 	String nom;
 	String cognoms;
+	UsuariGrup grup;
 	
+	public UsuariGrup getGrup() {
+		return grup;
+	}
+	public void setGrup(UsuariGrup grup) {
+		this.grup = grup;
+	}
 	public Integer getId() {
 		return id;
 	}
