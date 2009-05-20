@@ -100,7 +100,7 @@ CREATE TABLE pensament_vot
   CONSTRAINT pensament_vot_pkey PRIMARY KEY (id),
   CONSTRAINT pensament_vot_pensament_fkey FOREIGN KEY (pensament)
       REFERENCES pensament (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
+      ON UPDATE NO ACTION ON DELETE CASCADE,
   CONSTRAINT pensament_vot_votant_fkey FOREIGN KEY (votant)
       REFERENCES usuari (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION

@@ -1,0 +1,49 @@
+html{
+	background-color:cyan;
+}
+
+body{
+	margin:auto;
+	width:1000px;	
+	color:white;
+	
+}
+
+a:link {color:white} /* unvisited link */
+a:visited {color:white} /* visited link */
+a:hover {color:white} /* mouse over link */
+a:active {color:white} /* selected link */
+a {text-decoration: none}
+	
+h1{
+background-color: blue;
+padding:20px;
+}
+
+#header{
+float:right;
+}
+
+
+#cos{
+margin-top: 70px;
+}
+
+#menu{
+background-color:blue;
+float:left;
+padding-top:20px;
+padding-bottom: 100px;
+width:250px;
+}
+
+#menu ul{
+list-style-type:none;
+}
+
+#contingut{
+float:right;
+background-color:blue;
+padding:20px;
+width:700px;
+}

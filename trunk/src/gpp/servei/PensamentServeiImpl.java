@@ -36,7 +36,12 @@ public class PensamentServeiImpl implements PensamentServei {
     }
 
 	public Pensament getPensament(int id) {
-		return pDAO.getPensament(id);
+		
+		Pensament p = pDAO.getPensament(id);
+		
+		if(p!=null) p.setComentari(pDAO.getComentari(id));
+		
+		return p;
 	}
 
 

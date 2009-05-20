@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,52 +31,39 @@ public class ModerarPensamentController {
 	PensamentValidator validator;
 	
 	Usuari usuariActiu;
-	private String viewName ="moderarPensament";
+	private String viewName ="veurePensament";
 	
-	@RequestMapping(method = RequestMethod.GET, value="/moderarPensament.do")
-    public String moderarPensament(HttpServletRequest request, Model model) {
-        
-		HttpSession sessio = request.getSession();
-    	usuariActiu = (Usuari) sessio.getAttribute("usuari");
-    	
-    	if(usuariActiu!=null && usuariActiu.getGrup()==UsuariGrup.MODERADOR){ 
-    		int pensamentId = ServletRequestUtils.getIntParameter(request, "id", -1);
-    	  
-    		Pensament p = pServ.getPensament(pensamentId);
-    		    	
-    		model.addAttribute("pensament", p);
-    	
-    	}else viewName="redirect:llistaPensaments.do"; // sino no pot moderar pensaments
-    	
-    	return viewName;
-    }
 	
 	 @RequestMapping(method = RequestMethod.POST, value="/moderarPensament.do")
 	    public String onSubmit(@ModelAttribute("command")
-	    	    Pensament p, Model model, BindingResult errors,HttpServletRequest request) {
-			
+	    	    ModerarPensamentCommand cmd,  BindingResult errors,Model model,HttpServletRequest request) {
+		
+		 	HttpSession sessio = request.getSession();
+	    	usuariActiu = (Usuari) sessio.getAttribute("usuari");
+	    	
+	    	Pensament p = new Pensament();
+	        p.setId(cmd.getId());
+	        Comentari c = new Comentari();
+	        c.setDescripcio(cmd.getComentari());
+	        
+	        c.setId(cmd.getComId());
+	        p.setComentari(c);
+	        
+	        p.setEstat(PensamentEstat.valueOf(cmd.getEstat()));
+	    	if(usuariActiu!=null && usuariActiu.getGrup()==UsuariGrup.MODERADOR){ 
+	    	
+	    		
+	    		p.getComentari().setAutor(usuariActiu);
 		    validator.validarPensamentModerat(p, errors);
 		 
-		 if (errors.hasErrors()) {
-	            return viewName;
-	     }
+		    if (errors.hasErrors()) {
+		    	return viewName;
+		    }
 		 
-		 pServ.moderarPensament(p);
-		 
+		 	pServ.moderarPensament(p);
+	    	}
+	    	
 		 return "redirect:llistaPensaments.do";
 	 }
 	 
-	 @ModelAttribute("command")
-	    public Pensament getCommand(@RequestParam(value = "id", required = true) Integer id,@RequestParam(value = "comId", required = true) Integer comId,@RequestParam(value = "comentari", required = true) String comentari,@RequestParam(value = "estat", required = true) Integer estat, HttpServletRequest request) {
-	        
-		 	Pensament p = new Pensament();
-	        p.setId(id);
-	        Comentari c = new Comentari();
-	        c.setAutor(usuariActiu);
-	        c.setDescripcio(comentari);
-	        c.setId(comId);
-	        p.setComentari(c);
-	        p.setEstat(PensamentEstat.valueOf(estat));
-	        return p;
-	    }
 }

@@ -36,14 +36,14 @@ public class UsuariDaoImpl extends SimpleJdbcDaoSupport implements UsuariDao {
 
     public Usuari getUsuari(int id) {
         logger.info("Obtenim usuari!");
-        Usuari usuari =  getSimpleJdbcTemplate().queryForObject("select u.* from usuari u where id="+id,new UsuariMapper());
+        Usuari usuari =  getSimpleJdbcTemplate().queryForObject("select u.* from usuari u where id=?",new UsuariMapper(),id);
         return usuari;
     }
     public Usuari getUsuariRegistrat(int id) {
         logger.info("Obtenim usuari registrat!");
         Usuari usuari = null;
         try{
-        usuari =  getSimpleJdbcTemplate().queryForObject("select u.* from usuari u, usuari_grup ug where u.id="+id+" and tipus=ug.id and tipus=1" ,new UsuariMapper());
+        usuari =  getSimpleJdbcTemplate().queryForObject("select u.* from usuari u, usuari_grup ug where u.id=? and tipus=ug.id and tipus=1" ,new UsuariMapper(),id);
         }catch (Exception e) {
 			// No fem res, retornara null
 		}
@@ -81,7 +81,7 @@ public class UsuariDaoImpl extends SimpleJdbcDaoSupport implements UsuariDao {
 	public Usuari login(String username, String password) {
 		 Usuari usuari = null;
 	        try{
-	        	usuari =  getSimpleJdbcTemplate().queryForObject("select u.* from usuari u where u.nom_usuari='"+username+"' and contrassenya='"+password+"'" ,new UsuariMapper());
+	        	usuari =  getSimpleJdbcTemplate().queryForObject("select u.* from usuari u where u.nom_usuari=? and contrassenya=?" ,new UsuariMapper(),new Object[]{username,password});
 	        }catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -89,7 +89,7 @@ public class UsuariDaoImpl extends SimpleJdbcDaoSupport implements UsuariDao {
 	}
 	
 	public void modificarUsuari(Usuari u) {
-		getSimpleJdbcTemplate().update("update usuari set contrassenya="+u.getContrassenya()+", email="+u.getEmail()+" where id="+u.getId());
+		getSimpleJdbcTemplate().update("update usuari set contrassenya=?, email=? where id=?",new Object[]{u.getContrassenya(),u.getEmail(),u.getId()});
 	}
 
 

@@ -7,7 +7,7 @@
   
   </head>
   <body>
-    <h1>Gestor Pensaments Positius</h1>
+    <h1><a href="index.jsp">Gestor Pensaments Positius</a></h1>
     
     <div id="header">
     <form method="post" name="login" action="login.do">
