@@ -14,5 +14,9 @@ public interface PensamentDao {
 	void marcarPensament(int pensamentId);
 	void votarPensament(Usuari usuari, Pensament p);
 	Pensament getPensament(int id);
+	void crearPensament(Pensament p);
+	void modificarPensament(Pensament p);
+	void esborrarPensament(Pensament p);
+	void moderarPensament(Pensament p);
     
 }

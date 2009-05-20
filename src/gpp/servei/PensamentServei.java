@@ -7,7 +7,6 @@ import gpp.bean.Usuari;
 
 public interface PensamentServei {
 
-    void addPensament(Pensament pensament);
     Pensament getPensament(int id);
     List<Pensament> getPensamentsPopularitat();
     List<Pensament> getPensamentsAModerar();
@@ -15,5 +14,9 @@ public interface PensamentServei {
 	List<Pensament> getPensamentsPopularitatPerUsuariId(int usuariId);
 	void marcarPensament(int pensamentId);
 	void votarPensament(Usuari usuari, Pensament p);
+	void crearPensament(Pensament p);
+	void modificarPensament(Pensament p);
+	void esborrarPensament(Pensament p);
+	void moderarPensament(Pensament p);
 
 }

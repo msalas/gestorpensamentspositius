@@ -1,9 +1,11 @@
 package gpp.dao;
 
 
+import gpp.bean.Comentari;
 import gpp.bean.Pensament;
 import gpp.bean.PensamentEstat;
 import gpp.bean.Usuari;
+import gpp.bean.UsuariGrup;
 
 import java.sql.SQLException;
 
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
+import org.springframework.jdbc.object.SqlFunction;
 
 import org.springframework.stereotype.Repository;
 
@@ -66,16 +69,7 @@ public class PensamentDaoImpl extends SimpleJdbcDaoSupport implements PensamentD
         return pensaments;
     }
 
-    /*
-    public void savePensament(Pensament p) {
-        logger.info("Saving product: " + p.getDescripcio());
-        int count = getSimpleJdbcTemplate().update(
-            "update products set description = :description where id = :id",
-            new MapSqlParameterSource().addValue("description", p.getDescripcio())
-                .addValue("id", p.getId()));
-        logger.info("Rows affected: " + count);
-    }
-    */
+
     
     private static class PensamentMapper implements ParameterizedRowMapper<Pensament> {
 
@@ -135,6 +129,42 @@ public class PensamentDaoImpl extends SimpleJdbcDaoSupport implements PensamentD
 				
 			}
 	        return pensament;
+	}
+
+	
+	public void crearPensament(Pensament p) {
+		getSimpleJdbcTemplate().update("INSERT INTO pensament(titol, descripcio, autor, estat, data_publicacio, data_modificacio) VALUES ('"+p.getTitol()+"','"+p.getDescripcio()+"',"+p.getAutor().getId()+","+p.getEstat().getId()+",now(),now())");
+	}
+
+	public void esborrarPensament(Pensament p) {
+		getSimpleJdbcTemplate().update("delete from pensament where id="+p.getId());
+	}
+
+	public void modificarPensament(Pensament p) {
+		getSimpleJdbcTemplate().update("update pensament set titol="+p.getTitol()+", descripcio="+p.getDescripcio()+", estat=1, data_modificacio=now(),data_publicacio=now() where id="+p.getId());
+	}
+
+
+	public void moderarPensament(Pensament p) {
+		
+		Comentari aux = p.getComentari();
+		int idSeq;
+		
+		if(aux.getId()==null){
+			
+			idSeq =  getSimpleJdbcTemplate().queryForInt("SELECT nextVal('pensament_comentari_id_seq')");
+			 getSimpleJdbcTemplate().update("insert into pensament_comentari(id,text,autor) values ("+idSeq+",'"+aux.getDescripcio()+"',"+aux.getAutor().getId()+")");
+		
+		}else{
+			getSimpleJdbcTemplate().update("update pensament_comentari set text='"+aux.getDescripcio()+"', autor="+aux.getAutor().getId()+" where id="+aux.getId());
+			idSeq= aux.getId();
+		}
+		
+		if(p.getEstat()==PensamentEstat.POSITIU)
+			getSimpleJdbcTemplate().update("update pensament set estat=1, data_publicacio=now(), set comentari="+idSeq+" where id="+p.getId());
+		else getSimpleJdbcTemplate().update("update pensament set estat=3,set comentari="+idSeq+" where id="+p.getId());
+		
+		
 	}
 
 

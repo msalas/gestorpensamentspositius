@@ -26,13 +26,6 @@ public class PensamentServeiImpl implements PensamentServei {
 	@Resource
 	private PensamentDao pDAO;
 	
-	
-	public void addPensament(Pensament pensament) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
     
     public List<Pensament> getPensamentsPopularitat() {
         return pDAO.getPensamentsPopularitat();
@@ -66,6 +59,30 @@ public class PensamentServeiImpl implements PensamentServei {
 
 	public void votarPensament(Usuari usuari, Pensament p) {
 		pDAO.votarPensament(usuari,p);
+	}
+
+
+
+
+	public void crearPensament(Pensament p) {
+		pDAO.crearPensament(p);
+		
+	}
+
+
+
+	public void modificarPensament(Pensament p) {
+		pDAO.modificarPensament(p);		
+	}
+
+	public void esborrarPensament(Pensament p) {
+		pDAO.esborrarPensament(p);		
+	}
+
+	
+	public void moderarPensament(Pensament p) {
+		pDAO.moderarPensament(p);
+		
 	}
 
 }

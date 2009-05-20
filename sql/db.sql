@@ -146,6 +146,10 @@ INSERT INTO pensament(titol, descripcio, autor, estat)
 INSERT INTO pensament(titol, descripcio, autor, estat) VALUES ('Font Vella','Aigua natural Font Vella, la millor.',5,2);
 
     
+-- Mes pensaments 
+-- Its lovely to eat good food
+-- Its nice to spend time with good friends.
+
 -- CREACIO DE COMENTARIS
 
 -- CREACIO DE VOTS

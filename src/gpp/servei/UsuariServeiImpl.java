@@ -30,5 +30,11 @@ public class UsuariServeiImpl implements UsuariServei{
 		
 	}
 
+
+	public void modificarUsuari(Usuari u) {
+		uDAO.modificarUsuari(u);
+		
+	}
+
 	
 }
