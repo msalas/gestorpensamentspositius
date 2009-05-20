@@ -25,7 +25,7 @@ public class VeurePensamentController {
 	private String viewName = "veurePensament";
 	
 	 @RequestMapping(method = RequestMethod.GET, value="/veurePensament.do")
-	    public String crearPensament(HttpServletRequest request, Model model) {
+	    public String veurePensament(HttpServletRequest request, Model model) {
 		 
 		 int id = ServletRequestUtils.getIntParameter(request, "id", -1);
 		 	HttpSession sessio = request.getSession();

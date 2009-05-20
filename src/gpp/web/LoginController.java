@@ -1,6 +1,7 @@
 package gpp.web;
 
 import gpp.bean.Usuari;
+import gpp.bean.UsuariGrup;
 import gpp.servei.UsuariServei;
 
 import javax.annotation.Resource;
@@ -18,11 +19,14 @@ public class LoginController {
 	
 	@Resource
     private UsuariServei uServei;
-	private String viewName = "redirect:llistaPensaments.do";
+	
+
 	
 	@RequestMapping(method = RequestMethod.POST, value="/login.do")
     public String login(HttpServletRequest request, Model model) {
-        
+		
+		String viewName = "redirect:llistaPensaments.do";
+		
     	String username = ServletRequestUtils.getStringParameter(request,"nom","");
     	String password = ServletRequestUtils.getStringParameter(request,"password","");
     	
@@ -38,7 +42,7 @@ public class LoginController {
     	   		
     	   		//Fem que se'n recordi de l'usuari per temps indefinit
     	   		session.setMaxInactiveInterval(-1);
-    	   		viewName+="?id="+usuari.getId();
+    	   		if(usuari.getGrup()==UsuariGrup.REGISTRAT) viewName+="?id="+usuari.getId();
     	   	}
     	
     	

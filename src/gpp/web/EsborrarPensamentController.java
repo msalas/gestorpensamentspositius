@@ -32,7 +32,7 @@ public class EsborrarPensamentController {
 
 	 @RequestMapping(method = RequestMethod.POST, value="/esborrarPensament.do")
 	    public String onSubmit(@ModelAttribute("command")
-	    	    Pensament p, Model model, BindingResult errors,HttpServletRequest request) {
+	    	    Pensament p, BindingResult errors,Model model, HttpServletRequest request) {
 		
 			HttpSession sessio = request.getSession();
 	    	usuariActiu = (Usuari) sessio.getAttribute("usuari");
@@ -41,7 +41,7 @@ public class EsborrarPensamentController {
 		 
 		    model.addAttribute("usuariActiu", usuariActiu);
 		 
-//Comprovar que existeix o que l'usuari es el seu creador
+		    //Comprovar que existeix o que l'usuari es el seu creador
 		    validator.validarPensament(p, errors);
 		 
 		 if (errors.hasErrors()) {

@@ -33,7 +33,7 @@ public class ModificarUsuariController {
 
 	 @RequestMapping(method = RequestMethod.POST, value="/modificarUsuari.do")
 	    public String onSubmit(@ModelAttribute("command")
-	    	    Usuari u, Model model, BindingResult errors,HttpServletRequest request) {
+	    	    Usuari u, BindingResult errors, Model model,HttpServletRequest request) {
 		
 			HttpSession sessio = request.getSession();
 	    	usuariActiu = (Usuari) sessio.getAttribute("usuari");
@@ -51,7 +51,7 @@ public class ModificarUsuariController {
 		    model.addAttribute("usuariActiu", usuariActiu);
 		 
 		 
-		 return "redirect:llistaPensaments.do?id="+usuariActiu.getId();
+		 return "redirect:llistaPensaments.do?id="+u.getId();
 	 }
 	 
 	 @ModelAttribute("command")

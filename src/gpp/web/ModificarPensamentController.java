@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.HtmlUtils;
 
 @Controller
 public class ModificarPensamentController {
@@ -32,7 +33,7 @@ public class ModificarPensamentController {
 
 	 @RequestMapping(method = RequestMethod.POST, value="/modificarPensament.do")
 	    public String onSubmit(@ModelAttribute("command")
-	    	    Pensament p, Model model, BindingResult errors,HttpServletRequest request) {
+	    	    Pensament p, BindingResult errors,Model model, HttpServletRequest request) {
 		
 			HttpSession sessio = request.getSession();
 	    	usuariActiu = (Usuari) sessio.getAttribute("usuari");
@@ -55,8 +56,8 @@ public class ModificarPensamentController {
 	    public Pensament getCommand(@RequestParam(value = "id", required = true) Integer id,@RequestParam(value = "titol", required = false) String titol,@RequestParam(value = "desc", required = false) String desc, HttpServletRequest request) {
 	        
 		 	Pensament p = new Pensament();
-	        p.setTitol(titol);
-	        p.setDescripcio(desc);
+	        p.setTitol(HtmlUtils.htmlEscape(titol));
+	        p.setDescripcio(HtmlUtils.htmlEscape(desc));
 	        p.setId(id);
 	        
 	        return p;

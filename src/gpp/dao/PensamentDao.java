@@ -2,6 +2,7 @@ package gpp.dao;
 
 import java.util.List;
 
+import gpp.bean.Comentari;
 import gpp.bean.Pensament;
 import gpp.bean.Usuari;
 
@@ -18,5 +19,6 @@ public interface PensamentDao {
 	void modificarPensament(Pensament p);
 	void esborrarPensament(Pensament p);
 	void moderarPensament(Pensament p);
+	Comentari getComentari(int id);
     
 }

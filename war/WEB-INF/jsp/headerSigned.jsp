@@ -2,11 +2,11 @@
 <html>
   <head><title>Gestor Pensaments Positius</title>
   <script type="text/javascript" src="js/jquery.js"></script>
-  <link rel="stylesheet" href="/css/gpp.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="css/gpp.css" type="text/css" media="screen" />
   
   </head>
   <body>
-    <h1>Gestor Pensaments Positius</h1>
+    <h1><a href="index.jsp">Gestor Pensaments Positius</a></h1>
     
     <div id="header">
    <p>Benvingut/da <c:out value="${usuariActiu.nomUsuari}"></c:out></p>

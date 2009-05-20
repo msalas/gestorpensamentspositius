@@ -12,6 +12,10 @@ Esborrar que pregunti si vol o no i fer-ho.
 
 
     <div id="contingut">
+ 
+  
+
+
  <c:choose>
  <c:when test="${ usuariPerfil.id==usuariActiu.id}">
  <h2>El meu perfil</h2>
@@ -21,9 +25,9 @@ Esborrar que pregunti si vol o no i fer-ho.
  <h2>Veure Perfil de <c:out value="${usuariPerfil.nomUsuari}" /></h2>
  </c:otherwise>
  </c:choose>
- 
- <div id="usuariPerfil">
- 
+
+  <div id="usuariPerfil">
+  
  <c:choose>
  <c:when test="${empty usuariPerfil}"><c:out value="Aquest usuari no existeix."></c:out>
  </c:when>
@@ -35,34 +39,41 @@ Esborrar que pregunti si vol o no i fer-ho.
 <c:choose>
  <c:when test="${ usuariPerfil.edat==0}">
  Edat no definida
-
  </c:when>
- <c:otherwise>
- ${usuariPerfil.edat}
+ <c:otherwise> ${usuariPerfil.edat}
  </c:otherwise>
  </c:choose>
  </label>
 
-
- 
- 
- </c:otherwise>
- </c:choose>
- 
-  </div> <!-- fi perfil usuari -->
- 
- <div id="formulari">
+<div id="formulari">
  
  
  <c:choose>
  <c:when test="${ usuariActiu.grup =='MODERADOR'}">
- <a href="modificarUsuari.do?id=${usuariPerfil.id}">Modificar</a>
- <br/>
- <a href="esborrarUsuari.do?id=${usuariPerfil.id}">Esborrar</a>
+ 
+ <form action="modificarUsuari.do" method="post">
+ <input type="hidden" value="${usuariPerfil.id}" name="id"> 
+ <input type="password" value="${usuariPerfil.contrassenya}" name="contra">
+ <input type="text" value="${usuariPerfil.email}" name="email">
+ <input type="submit" value="Modificar"> 
+ 
+ </form>
+ 
+ <form action="esborrarUsuari.do" method="post">
+ <input type="hidden" value="${usuariPerfil.id}" name="id"> 
+ <input type="submit" value="Esborrar"> 
+ </form>
  </c:when>
  <c:when test="${ usuariActiu.grup =='REGISTRAT' and usuariActiu.id==usuariPerfil.id}">
- <a href="modificarUsuari.do?id=${usuariPerfil.id}">Modificar</a>
-   </c:when>
+ <form action="modificarUsuari.do" method="post">
+ <input type="hidden" value="${usuariPerfil.id}" name="id"> 
+ <input type="password" value="${usuariPerfil.contrassenya}" name="contra">
+ <input type="text" value="${usuariPerfil.email}" name="email">
+ <input type="submit" value="Modificar"> 
+ 
+ </form>
+ 
+    </c:when>
  <c:otherwise>
  <br/>
  <a href="llistaPensaments.do?id=${usuariPerfil.id }">Veure pensaments d'aquest usuari</a>
@@ -71,6 +82,14 @@ Esborrar que pregunti si vol o no i fer-ho.
  
  
  </div> <!-- fi formulari  -->
+ 
+ 
+ </c:otherwise>
+ </c:choose>
+ 
+  </div> <!-- fi perfil usuari -->
+ 
+ 
  
     </div> <!-- fi contingut -->
 
