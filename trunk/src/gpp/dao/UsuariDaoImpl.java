@@ -87,6 +87,10 @@ public class UsuariDaoImpl extends SimpleJdbcDaoSupport implements UsuariDao {
 			}
 	        return usuari;
 	}
+	
+	public void modificarUsuari(Usuari u) {
+		getSimpleJdbcTemplate().update("update usuari set contrassenya="+u.getContrassenya()+", email="+u.getEmail()+" where id="+u.getId());
+	}
 
 
 

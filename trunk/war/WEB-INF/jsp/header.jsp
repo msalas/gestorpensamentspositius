@@ -1,6 +1,11 @@
 
 <html>
-  <head><title>Gestor Pensaments Positius</title></head>
+  <head><title>Gestor Pensaments Positius</title>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <link rel="stylesheet" href="css/gpp.css" type="text/css" media="screen" />
+  
+  
+  </head>
   <body>
     <h1>Gestor Pensaments Positius</h1>
     

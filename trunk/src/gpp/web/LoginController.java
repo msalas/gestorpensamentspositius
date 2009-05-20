@@ -18,6 +18,7 @@ public class LoginController {
 	
 	@Resource
     private UsuariServei uServei;
+	private String viewName = "redirect:llistaPensaments.do";
 	
 	@RequestMapping(method = RequestMethod.POST, value="/login.do")
     public String login(HttpServletRequest request, Model model) {
@@ -32,13 +33,16 @@ public class LoginController {
     	   	if(usuari!=null){
     	   		session= request.getSession(true);
     	   		session.setAttribute("usuari", usuari);
+    	   		// Recuperar vots realitzats de l'usuari
+    	   		
     	   		
     	   		//Fem que se'n recordi de l'usuari per temps indefinit
     	   		session.setMaxInactiveInterval(-1);
-    	}
+    	   		viewName+="?id="+usuari.getId();
+    	   	}
     	
     	
-    	return "redirect:llistaPensaments.do";
+    	return viewName;
     }
     
 }
