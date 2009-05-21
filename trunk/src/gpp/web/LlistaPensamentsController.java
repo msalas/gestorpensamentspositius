@@ -58,7 +58,10 @@ public class LlistaPensamentsController {
         		   
     		}else{
     			llistaVots ="votsUR";
-        		if(usuariId!=-1) pensaments = pServei.getPensamentsPopularitatPerUsuariId(usuariId);
+        		if(usuariId!=-1){
+        			if(usuariActiu.getId()==usuariId)pensaments = pServei.getPensamentsAModerarPerUsuariId(usuariId);
+        			else pensaments = pServei.getPensamentsPopularitatPerUsuariId(usuariId);
+        		}
         		else pensaments = pServei.getPensamentsPopularitat(); 
 
     		}
