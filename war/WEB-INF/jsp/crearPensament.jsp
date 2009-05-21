@@ -6,9 +6,9 @@
  
  <div id="formulari">
  <form method="post" name="crearPensament" action="crearPensament.do">
-<label>Títol</label><input type="text"  value="" name="titol" id="titol"/>
-<label>Descripció</label><input type="textarea"  value="" name="desc" id="desc" rows="10" cols="60" />
-<input type="submit" id="submit" name="Submit"/>
+<label><b>Títol</b></label><input type="text"  value="" name="titol" id="titol"/>
+<br/><br/><label><b>Descripció</b></label><input type="textarea"  value="" name="desc" id="textarea"  /><br/><br/>
+<input type="submit" id="submit" name="Crear" value="Crear" />
 </form>
  
   </div> <!-- fi formulari -->

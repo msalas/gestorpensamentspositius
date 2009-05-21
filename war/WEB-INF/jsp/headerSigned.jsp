@@ -6,10 +6,14 @@
   
   </head>
   <body>
+  
+  <div id="contenidor">
     <h1><a href="index.jsp">Gestor Pensaments Positius</a></h1>
     
     <div id="header">
-   <p>Benvingut/da <c:out value="${usuariActiu.nomUsuari}"></c:out></p>
-   <a href="logout.do">Logout</a>
+   	
+     <div id="sign"> <b><a href="logout.do">Logout</a></b>
+    </div><span>Benvingut/da</span> <span id="username"><b><c:out value="${usuariActiu.nomUsuari}"></c:out></b></span>
     </div>
+   
         <div id="cos">
