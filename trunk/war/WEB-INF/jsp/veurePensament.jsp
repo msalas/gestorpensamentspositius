@@ -23,20 +23,35 @@
  <c:otherwise>
  
   <br/>
- <b>${pensament.titol}</b>
- <br/>
- <div id="desc">
- ${pensament.descripcio}
- </div>
- <fmt:formatDate value="${pensament.dataCreacio}" pattern="dd/MM/yyyy hh:mm" />
- <fmt:formatDate value="${pensament.dataPublicacio}" pattern="dd/MM/yyyy hh:mm" />
- <fmt:formatDate value="${pensament.dataModificacio}" pattern="dd/MM/yyyy hh:mm" />
-
-
- ${pensament.autor.nomUsuari }
  
+ 
+
+ <div id="dates">
+ 
+ <span id="username"><b><a href="veurePerfil.do?id=${pensament.autor.id }">${pensament.autor.nomUsuari }</a></b></span>
+ 
+ <br/>Data de creació: <fmt:formatDate value="${pensament.dataCreacio}" pattern="dd/MM/yyyy hh:mm" />
+ <br/>Data de publicació: <fmt:formatDate value="${pensament.dataPublicacio}" pattern="dd/MM/yyyy hh:mm" />
+ <br/>Data de modificació: <fmt:formatDate value="${pensament.dataModificacio}" pattern="dd/MM/yyyy hh:mm" />
+</div>
+
+ 
+ 
+ <div id="desc">
+<b>${pensament.titol}</b>
+  <br/><br/>
+ ${pensament.descripcio}
  <br/>
- ${pensament.comentari.descripcio }
+ </div>
+ 
+  <br/>
+  <c:if test="${not empty pensament.comentari.descripcio }">
+<div id="comentari">
+<b>Comentari</b>
+<br/>
+ <i>${pensament.comentari.descripcio }</i>
+ </div> 
+  </c:if>
  <br/>
  
  <c:choose>
@@ -48,9 +63,12 @@
  <form action="moderarPensament.do" method="post">
  <input type="hidden" value="${pensament.id}" name="id">
  <input type="hidden" value="${pensament.comentari.id}" name="comId">
- <input type="textarea" value="${pensament.comentari.descripcio}" name="comentari">
+<label><b>Comentari</b></label>
+ <input type="textarea" value="${pensament.comentari.descripcio}" name="comentari" id="textarea">
+ <br/><br/>
  <input type="radio" name="estat" value="3" checked="checked" > NEGATIU
  <input type="radio" name="estat" value="1" > POSITIU
+ <br/><br/>
  <input type="submit" value="Moderar"> 
  </form>
  
@@ -65,12 +83,12 @@
  
  <form action="modificarPensament.do" method="post">
  <input type="hidden" value="${pensament.id}" name="id"> 
- <input type="text" value="${pensament.titol}" name="titol">
- <input type="textarea" value="${pensament.descripcio}" name="desc">
- <input type="submit" value="Modificar"> 
+ <label><b>Títol</b></label><input type="text" value="${pensament.titol}" name="titol" id="titol">
+ <br/><br/><label><b>Descripció</b></label><input type="textarea" value="${pensament.descripcio}" name="desc" id="textarea">
+ <br/><br/><input type="submit" value="Modificar"> 
  
  </form>
- 
+ <br/><br/>
  <form action="esborrarPensament.do" method="post">
  <input type="hidden" value="${pensament.id}" name="id"> 
  <input type="submit" value="Esborrar"> 

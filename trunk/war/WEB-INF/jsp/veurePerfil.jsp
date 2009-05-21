@@ -34,7 +34,7 @@ Esborrar que pregunti si vol o no i fer-ho.
  <c:otherwise>
  
  <label><b>${usuariPerfil.nomUsuari}</b></label>
- 
+ <br/><br/>
  <label>
 <c:choose>
  <c:when test="${ usuariPerfil.edat==0}">
@@ -43,7 +43,7 @@ Esborrar que pregunti si vol o no i fer-ho.
  <c:otherwise> ${usuariPerfil.edat}
  </c:otherwise>
  </c:choose>
- </label>
+ </label><br/><br/>
 
 <div id="formulari">
  
@@ -53,33 +53,36 @@ Esborrar que pregunti si vol o no i fer-ho.
  
  <form action="modificarUsuari.do" method="post">
  <input type="hidden" value="${usuariPerfil.id}" name="id"> 
- <input type="password" value="${usuariPerfil.contrassenya}" name="contra">
- <input type="text" value="${usuariPerfil.email}" name="email">
- <input type="submit" value="Modificar"> 
+ <label><b>Contrassenya:</b></label><input type="password" value="${usuariPerfil.contrassenya}" name="contra" style="margin-left:20px;">
+ <br/><br/><label><b>Email:</b></label><input type="text" value="${usuariPerfil.email}" name="email" style="margin-left:20px;width:196px;">
+ <br/><br/><input type="submit" value="Modificar"> 
  
  </form>
- 
+ <br/>
  <form action="esborrarUsuari.do" method="post">
  <input type="hidden" value="${usuariPerfil.id}" name="id"> 
  <input type="submit" value="Esborrar"> 
  </form>
+  <br/>
+ <a href="llistaPensaments.do?id=${usuariPerfil.id }">Veure pensaments d'aquest usuari</a>
  </c:when>
  <c:when test="${ usuariActiu.grup =='REGISTRAT' and usuariActiu.id==usuariPerfil.id}">
  <form action="modificarUsuari.do" method="post">
  <input type="hidden" value="${usuariPerfil.id}" name="id"> 
- <input type="password" value="${usuariPerfil.contrassenya}" name="contra">
- <input type="text" value="${usuariPerfil.email}" name="email">
+ <label><b>Contrassenya:</b></label><input type="password" value="${usuariPerfil.contrassenya}" name="contra" style="margin-left:20px;">
+ <label><b>Email:</b></label><input type="text" value="${usuariPerfil.email}" name="email" style="margin-left:20px;width:196px;">
  <input type="submit" value="Modificar"> 
  
  </form>
  
     </c:when>
  <c:otherwise>
- <br/>
+  <br/>
  <a href="llistaPensaments.do?id=${usuariPerfil.id }">Veure pensaments d'aquest usuari</a>
  </c:otherwise>
  </c:choose>
  
+
  
  </div> <!-- fi formulari  -->
  
