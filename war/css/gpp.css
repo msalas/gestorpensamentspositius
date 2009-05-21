@@ -9,10 +9,14 @@ body{
 	
 }
 
-a:link {color:white} /* unvisited link */
-a:visited {color:white} /* visited link */
-a:hover {color:white} /* mouse over link */
-a:active {color:white} /* selected link */
+#contenidor{
+	width:1000px;	
+}
+
+a:link {color:yellow} /* unvisited link */
+a:visited {color:yellow} /* visited link */
+a:hover {color:gray} /* mouse over link */
+a:active {color:yellow} /* selected link */
 a {text-decoration: none}
 	
 h1{
@@ -20,25 +24,64 @@ background-color: blue;
 padding:20px;
 }
 
-#header{
+#sign{
 float:right;
+margin-right:10px;
+font-size:16px;
 }
 
+#header{
+	width:1000px;
+	height:43px;
+	font-size:15pt;
+	color: blue;
+}
+
+#username{
+	color:red;	
+}
+#username a:link {color:red} /* unvisited link */
+#username a:visited {color:red} /* visited link */
+#username a:hover {color:gray} /* mouse over link */
+#username a:active {color:red} /* selected link */
 
 #cos{
-margin-top: 70px;
+
 }
 
+#dates{
+	float:right;
+	width:250px; 
+	margin-right:10px;
+	}
+	
+#desc{
+
+	background-color:#55EE00;width:400px;padding:10px;	
+	color:black;
+}
+
+#comentari{
+
+	background-color:yellow;padding:10px;	
+	color:black;
+}
+		
 #menu{
 background-color:blue;
 float:left;
 padding-top:20px;
 padding-bottom: 100px;
 width:250px;
+font-size:13pt;
 }
 
 #menu ul{
 list-style-type:none;
+}
+
+#menu li{
+margin-bottom:10px;
 }
 
 #contingut{
@@ -46,4 +89,15 @@ float:right;
 background-color:blue;
 padding:20px;
 width:700px;
+}
+
+#titol{ 
+	width:695px;
+
+}
+
+#textarea{
+
+	width:695px;
+	height:60px;
 }
