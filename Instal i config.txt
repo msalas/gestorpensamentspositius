@@ -13,8 +13,107 @@ configurar correctament l'aplicacio per gestionar pensaments positius, així com
 el seu desplegament i execució. 
 
 
+Dins el ZIP proporcionat es pot trobar:
+
+- Instal i config.txt --> Explica el procés d'execució i instal.lació
+- db.sql --> Script de creació de la base de dades
+- GestorPensamentsPositius.war --> aplicació a desplegar al servidor
+- gpp.zip --> Codi de l'aplicació (projecte usant eclipse IDE)
+
+
+##### 1. Requeriments per executar l'aplicacio amb el .war proporcionat
+
+## 1.1 - Versió Java: 
+Si ja es disposa d'una aplicació IDE (Eclipse, Netbeans, IntelliJIdea,..)
+ja deveu tenir instalada una versió de Java. En tot cas, cal que la versió sigui 
+1.5 o superior (JRE 1.5+)
+
+Si no és té ja instalat a la màquina es pot descarregar la versió més nova aquí:
+https://cds.sun.com/is-bin/INTERSHOP.enfinity/WFS/CDS-CDS_Developer-Site/en_US/-/USD/ViewProductDetail-Start?ProductRef=jre-6u13-oth-JPR@CDS-CDS_Developer
+
+## 1.2 - Versió Tomcat:
+Un cop instalat l'entorn Java i comprovat que ja funciona correctament baixar-se el servidor tomcat:
+http://mirror.eunet.fi/apache/tomcat/tomcat-5/v5.5.27/bin/apache-tomcat-5.5.27.exe
+
+## 1.3 - El fitxer WAR:
+Un cop instal.lat el tomcat, caldrà copiar el fitxer GestorPensamentsPositius.war al directori webapps:
+(Si no s'ha triat a cap altre lloc, per defecte s'instal.la al següent directori, en cas que s'utilitzi sistema operatiu Windows)
+C:\Program Files\Apache Software Foundation\Tomcat 5.5\webapps
+
+## 1.4 - Les llibreries JAR:
+Seguidament caldrà descarregar un seguit de .jar i instal.lar-los a \shared\lib:
+C:\Program Files\Apache Software Foundation\Tomcat 5.5\shared\lib
+
+La llista de jar's que s'han de copiar allà són:
+
+Del ZIP que descarregueu aquí:
 http://s3.amazonaws.com/dist.springframework.org/release/SPR/spring-framework-2.5.6.SEC01-with-dependencies.zip
+calen els jar's següents:
+\spring-framework-2.5.6.SEC01\lib\jakarta-commons\commons-dbcp.jar
+\spring-framework-2.5.6.SEC01\lib\jakarta-commons\commons-logging.jar
+\spring-framework-2.5.6.SEC01\lib\jakarta-commons\commons-pool.jar
+\spring-framework-2.5.6.SEC01\lib\j2ee\jstl.jar
+\spring-framework-2.5.6.SEC01\lib\j2ee\common-annotations.jar
+\spring-framework-2.5.6.SEC01\lib\jakarta-taglibs\standard.jar
+\spring-framework-2.5.6.SEC01\dist\spring.jar
+\spring-framework-2.5.6.SEC01\lib\dist\modules\spring-webmvc.jar
 
-First create a 'lib'  directory in the 'war/WEB-INF'  directory. Then, from the Spring distribution, copy spring.jar (from spring-framework-2.5/dist) and spring-webmvc.jar (from spring-framework-2.5/dist/modules) to the new 'war/WEB-INF/lib' directory. Also, copy commons-logging.jar (from spring-framework-2.5/lib/jakarta-commons) to the 'war/WEB-INF/lib' directory. These jars will be deployed to the server and they are also used during the build process.
 
+El driver de postgre:
 http://jdbc.postgresql.org/download/postgresql-8.3-604.jdbc3.jar
+
+## 1.5 - Base de dades POSTGRESQL
+Finalment, cadlrà instal.lar el servidor de bases de dades, que es pot descarregar des d'aquí:
+http://www.enterprisedb.com/getfile.jsp?fileid=485
+
+Un cop el servidor està instal.lat i en marxa, podem crear la base de dades amb l'script 
+- db.sql 
+proporcionat.
+
+NOTA! Cal tenir en compte que si s'utilitza el pgAdmin primer cal crear la base de dades, i un cop creada cal connectar-s'hi.
+A partir d'aquí ja es poden crear totes les taules pertinents en aquesta base de dades creada.
+L'usuari postgres amb el qual l'aplicació es connecta a la base de dades té contrassenya: holahola
+En cas que l'aplicació no funcioni és perquè l'usuari postgres amb la contrassenya esmentada no existeix.
+
+## 1.6 - Configuració aplicació:
+Un cop desplegada l'aplicació es pot accedir a 
+C:\Program Files\Apache Software Foundation\Tomcat 5.5\webapps\GestorPensamentsPositius\WEB-INF\properties\config.properties i canviar
+allà tant el nom de la base de dades com dades de connexió pertinents.
+
+Un cop la base dades s'ha creat correctament ja es pot iniciar el servidor Tomcat per a executar l'aplicació.
+
+## 1.7 - Accés a l'aplicació:
+Per defecte, l'aplicació hauria de ser accessible així:
+http://localhost:8080/GestorPensamentsPositius/
+
+##### 2. Execució de l'aplicació amb IDE
+
+En aquest cas disposem d'un script build.xml a executar amb l'Ant del IDE amb diferents funcions, entre les quals la de compilar i
+desplegar l'aplicació correctament.
+
+Prèviament a utilitzar el IDE s'haurà de crear la base de dades correctament seguint el pas 1.5.
+
+Seguidament es pot configurar la versió de Tomcat a utilitzar aquí:
+- build.properties
+
+I també, tal com s'ha esmentat al punt 1.6, la configuració de l'accés a la base de dades aquí:
+PROJECTE/war/WEB-INF/properties/config.properties
+
+Finalment, les llibreries (1.4) també es poden col.locar a:
+PROJECTE/war/WEB-INF/lib
+
+Un cop realitzats aquests passos es pot desplegar l'aplicació:
+- ant deploy
+
+
+##### 3. Compilar l'aplicació amb IDE
+
+Per a fer això es pot utilitzar l'script esmentat anteriorment (build.xml) amb l'ant i l'operació build
+
+Addicionalment, caldrà afegir les llibreries al BUILD PATH
+
+També caldrà afegir la llibreria servlet-api.jar del tomcat com a llibreria externa. Aquesta es troba a:
+C:\Program Files\Apache Software Foundation\Tomcat 5.5\server\lib (En el cas de Tomcat 5 - sense \server\ per a tomcat 6)
+
+##### 4. Accés al codi a través de SVN
+svn checkout http://gestorpensamentspositius.googlecode.com/svn/
