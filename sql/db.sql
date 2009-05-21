@@ -5,7 +5,8 @@
 CREATE DATABASE gpp
   WITH OWNER = postgres
        ENCODING = 'UTF8';
-       
+
+
 -- Table: usuari_grup
 
 -- DROP TABLE usuari_grup;
@@ -131,28 +132,18 @@ INSERT INTO usuari(nom_usuari, contrassenya, nom, cognoms, email, edat, tipus)
 INSERT INTO usuari(nom_usuari, contrassenya, nom, cognoms, email, edat, tipus)
     VALUES ('socundesastre','test1234','Pepe','Velez','pepe.velez@eureka.com',NULL, 1);
 
--- CREACIO D'ESTATS DELS PENSAMENTS
-INSERT INTO pensament_estat(nom) VALUES ('POSITIU');
-INSERT INTO pensament_estat(nom) VALUES ('DUBTOS');
-INSERT INTO pensament_estat(nom) VALUES ('NEGATIU');
+INSERT INTO usuari(nom_usuari, contrassenya, nom, cognoms, email, edat, tipus)
+    VALUES ('socfelis','test1234','Rodamón','Espardenya','roda.enya@eureka.com',28, 1);
+
 
 -- CREACIO DE PENSAMENTS
-INSERT INTO pensament(titol, descripcio, autor, estat)
-    VALUES ('Fa bon dia','Avui fa un dia esplèndid. Fa molt de sol. És un dia alegre!',4,1);
+INSERT INTO pensament(titol, descripcio, autor, estat) VALUES ('Fa bon dia','Avui fa un dia esplèndid. Fa molt de sol. És un dia alegre!',4,1);
 INSERT INTO pensament(titol, descripcio, autor, estat) VALUES ('Fa mal dia','Avui fa un dia horroros!',4,3);
-
-INSERT INTO pensament(titol, descripcio, autor, estat)
-    VALUES ('Salut és vida!','M''encanta fer esport, i cuidar-me. ',5,1);
+INSERT INTO pensament(titol, descripcio, autor, estat) VALUES ('Salut és vida!','M''encanta fer esport, i cuidar-me. ',5,1);
 INSERT INTO pensament(titol, descripcio, autor, estat) VALUES ('Font Vella','Aigua natural Font Vella, la millor.',5,2);
+INSERT INTO pensament(titol, descripcio, autor, estat) VALUES ('Què bonic tenir amics!','M''agrada passar l''estona amb els meus amics. I a tu? :)',6,1);
+INSERT INTO pensament(titol, descripcio, autor, estat) VALUES ('Nyam nyam!','M''encanta menjar bé i bon menjar! Com la cuina catalana no hi ha res!',6,1);
 
-    
--- Mes pensaments 
--- Its lovely to eat good food
--- Its nice to spend time with good friends.
-
--- CREACIO DE COMENTARIS
-
--- CREACIO DE VOTS
 
 
 CREATE TRUSTED PROCEDURAL LANGUAGE 'plpgsql'
