@@ -159,7 +159,7 @@ public class PensamentDaoImpl extends SimpleJdbcDaoSupport implements PensamentD
 	}
 
 	public void modificarPensament(Pensament p) {
-		getSimpleJdbcTemplate().update("update pensament set titol=?, descripcio=?, estat=1, data_modificacio=now(),data_publicacio=now() where id=?",new Object[] {p.getTitol(),p.getDescripcio(),p.getId()});
+		getSimpleJdbcTemplate().update("update pensament set titol=?, descripcio=?, estat=2, data_modificacio=now() where id=?",new Object[] {p.getTitol(),p.getDescripcio(),p.getId()});
 	}
 
 
