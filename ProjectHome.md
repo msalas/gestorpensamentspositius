@@ -1,0 +1,1 @@
+This is a final project for my university. It is in catalan. Maybe in the future I would apply internationalisation to it, but it is not in the schedule by now.
